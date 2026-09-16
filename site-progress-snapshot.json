@@ -1,0 +1,41 @@
+{
+  "_note": "Backup snapshot of the AI Engineering from Scratch website's local-only progress tracker (site/progress.js, browser localStorage key aifs:progress:v2). The site itself has no server-side save, so this file preserves it in git. Not read automatically by the site.",
+  "_snapshotDate": "2026-09-16",
+  "lessons": {
+    "phases/00-setup-and-tooling/01-dev-environment": {
+      "answers": {
+        "post-q0": { "correct": true, "picked": 1, "t": 1789569111959 },
+        "post-q1": { "correct": true, "picked": 2, "t": 1789569117345 },
+        "post-q2": { "correct": true, "picked": 1, "t": 1789569119345 },
+        "pre-q0": { "correct": false, "picked": 0, "t": 1789568087699 },
+        "pre-q1": { "correct": true, "picked": 0, "t": 1789568093124 }
+      },
+      "checkpoints": { "builtAt": null, "evidenceAt": null, "ranAt": null, "readAt": null },
+      "completedAt": null,
+      "completionSource": "",
+      "quizPassedAt": null,
+      "visitedAt": 1789570594899
+    },
+    "phases/00-setup-and-tooling/02-git-and-collaboration": {
+      "answers": {
+        "pre-q0": { "correct": true, "picked": 2, "t": 1789570902607 },
+        "pre-q1": { "correct": true, "picked": 1, "t": 1789570916679 }
+      },
+      "checkpoints": { "builtAt": null, "evidenceAt": null, "ranAt": null, "readAt": null },
+      "completedAt": null,
+      "completionSource": "",
+      "quizPassedAt": null,
+      "visitedAt": 1789570841530
+    },
+    "phases/00-setup-and-tooling/06-python-environments": {
+      "answers": {},
+      "checkpoints": { "builtAt": null, "evidenceAt": null, "ranAt": null, "readAt": null },
+      "completedAt": null,
+      "completionSource": "",
+      "quizPassedAt": null,
+      "visitedAt": 1789570591965
+    }
+  },
+  "schemaVersion": 2,
+  "updatedAt": 1789570916679
+}
