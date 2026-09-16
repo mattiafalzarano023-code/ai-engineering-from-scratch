@@ -39,5 +39,7 @@ Learning AI engineering as part of a career change. Not sure yet exactly what to
 | Date | Lesson | Quiz | Note |
 |------|--------|------|------|
 | 2026-09-16 | 0/01-dev-environment | 3/3 | Set up Python venv + PyTorch (CPU) in WSL2, not Windows-side; working from a repo clone at ~/aifs (symlinked/shortened path) to avoid /mnt/c slowdowns. |
+| 2026-09-16 | 0/02-git-and-collaboration | 2/3 | Missed the git add/commit/push order (picked git clone/add/push instead). Also set up GitHub CLI device-flow auth in WSL and pushed personal fork for the first time. |
 
 ## Review queue
+- 0/02-git-and-collaboration — correct save/backup sequence is `git add` → `git commit` → `git push` (staged first, then snapshot, then upload to remote). Quiz score 2/3.

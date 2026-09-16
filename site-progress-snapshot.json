@@ -18,6 +18,9 @@
     },
     "phases/00-setup-and-tooling/02-git-and-collaboration": {
       "answers": {
+        "post-q0": { "correct": false, "picked": 1, "t": 1789573332232 },
+        "post-q1": { "correct": true, "picked": 0, "t": 1789573343761 },
+        "post-q2": { "correct": true, "picked": 0, "t": 1789573353111 },
         "pre-q0": { "correct": true, "picked": 2, "t": 1789570902607 },
         "pre-q1": { "correct": true, "picked": 1, "t": 1789570916679 }
       },
@@ -37,5 +40,5 @@
     }
   },
   "schemaVersion": 2,
-  "updatedAt": 1789570916679
+  "updatedAt": 1789573353111
 }
