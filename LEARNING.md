@@ -44,6 +44,11 @@ Learning AI engineering as part of a career change. Not sure yet exactly what to
 | 2026-09-16 | 0/02-git-and-collaboration | 2/3 | Missed the git add/commit/push order (picked git clone/add/push instead). Also set up GitHub CLI device-flow auth in WSL and pushed personal fork for the first time. |
 | 2026-09-17 | 0/06-python-environments | 1/3 | Taught interactively step-by-step. Strong on venv isolation & PATH concept once explained. Missed: (1) pip+conda mixing breaks conda's dependency tracking — picked "incompatible interpreter"; (2) CUDA mismatch cause — picked "forgot to import torch.cuda". Also confused reproducibility: thought pyproject.toml reproduces an identical env, but it's the lockfile (== pins) vs pyproject range (>=). Skipped lesson 03 (GPU) and 04/05 to do 06 out of order. Hit CRLF line-ending bug in env_setup.sh (autocrlf=true in WSL clone). |
 
+## Next session plan
+- **In progress:** 0/07-docker-for-ai — reached the `docker build -t ai-dev -f phases/00-setup-and-tooling/07-docker-for-ai/code/Dockerfile .` step (build was downloading the base image when session ended 2026-09-17). Not yet quizzed/logged.
+- **Plan for next time (learner's explicit request):** finish Docker (07) — including the build and its quiz — then start the FULL numeric path by going to **0/03-gpu-setup-and-cloud** (first of the backfill: 03 → 04 → 05 → 08), then continue 08→12.
+- Also pending on WSL: apply the CRLF fix (`git config core.autocrlf input` + strip `\r` from `.sh`) so course scripts run. Docker Engine (native, in WSL) is already installed and working.
+
 ## Review queue
 - 0/02-git-and-collaboration — correct save/backup sequence is `git add` → `git commit` → `git push` (staged first, then snapshot, then upload to remote). Quiz score 2/3.
 - 0/06-python-environments — (1) mixing pip inside a conda env breaks conda's dependency solver/tracking (not an interpreter incompatibility); (2) "CUDA not available" with an NVIDIA GPU = PyTorch's CUDA version > driver's CUDA version (mismatch), not a missing import; (3) reproducibility: install from the **lockfile** (`uv.lock`, `==` exact pins incl. transitive) for identical envs — `pyproject.toml` uses `>=` ranges and can drift over time. Quiz score 1/3.
