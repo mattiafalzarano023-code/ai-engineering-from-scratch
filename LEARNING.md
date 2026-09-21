@@ -43,10 +43,11 @@ Learning AI engineering as part of a career change. Not sure yet exactly what to
 | 2026-09-16 | 0/01-dev-environment | 3/3 | Set up Python venv + PyTorch (CPU) in WSL2, not Windows-side; working from a repo clone at ~/aifs (symlinked/shortened path) to avoid /mnt/c slowdowns. |
 | 2026-09-16 | 0/02-git-and-collaboration | 2/3 | Missed the git add/commit/push order (picked git clone/add/push instead). Also set up GitHub CLI device-flow auth in WSL and pushed personal fork for the first time. |
 | 2026-09-17 | 0/06-python-environments | 1/3 | Taught interactively step-by-step. Strong on venv isolation & PATH concept once explained. Missed: (1) pip+conda mixing breaks conda's dependency tracking — picked "incompatible interpreter"; (2) CUDA mismatch cause — picked "forgot to import torch.cuda". Also confused reproducibility: thought pyproject.toml reproduces an identical env, but it's the lockfile (== pins) vs pyproject range (>=). Skipped lesson 03 (GPU) and 04/05 to do 06 out of order. Hit CRLF line-ending bug in env_setup.sh (autocrlf=true in WSL clone). |
+| 2026-09-21 | 0/07-docker-for-ai | 3/3 | Perfect score. Built the image, hit `--gpus all` failure (machine is CPU-only, no NVIDIA GPU) and correctly diagnosed it; dropped the flag to run on CPU. Explored Jupyter running in the container (port mapping + volume mount clicked). Removed the `deploy.resources...nvidia` GPU block from code/docker-compose.yml so `docker compose up` runs on CPU. Understood compose service-name networking (ai-dev → qdrant). |
 
 ## Next session plan
-- **In progress:** 0/07-docker-for-ai — reached the `docker build -t ai-dev -f phases/00-setup-and-tooling/07-docker-for-ai/code/Dockerfile .` step (build was downloading the base image when session ended 2026-09-17). Not yet quizzed/logged.
-- **Plan for next time (learner's explicit request):** finish Docker (07) — including the build and its quiz — then start the FULL numeric path by going to **0/03-gpu-setup-and-cloud** (first of the backfill: 03 → 04 → 05 → 08), then continue 08→12.
+- **Next lesson:** 0/03-gpu-setup-and-cloud — start of the backfill (03 → 04 → 05 → 08), then continue 09 → 10 → 11 → 12 to finish Phase 0. Following the FULL numeric curriculum, not the site's curated path.
+- Uncommitted local change: `code/docker-compose.yml` (07) had its NVIDIA `deploy` block removed for CPU-only use — not yet committed. `~/aifs` is a symlink to the Windows checkout so the change is already live in WSL; only matters for the Kubuntu laptop / fork.
 - Also pending on WSL: apply the CRLF fix (`git config core.autocrlf input` + strip `\r` from `.sh`) so course scripts run. Docker Engine (native, in WSL) is already installed and working.
 
 ## Review queue
