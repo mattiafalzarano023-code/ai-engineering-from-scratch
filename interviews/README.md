@@ -10,10 +10,10 @@ The math, the networks and the transformer that every later answer builds on.
 
 | Card | Items | Planned |
 |---|---|---|
-| Math and classical ML | 0 | 15 |
-| Deep learning | 0 | 15 |
-| Transformers | 0 | 15 |
-| Tokenization, sampling and decoding | 0 | 15 |
+| [Math and classical ML](questions/math-classical-ml/README.md) | 22 | 15 |
+| [Deep learning](questions/deep-learning/README.md) | 22 | 15 |
+| [Transformers](questions/transformers/README.md) | 24 | 15 |
+| [Tokenization, sampling and decoding](questions/tokenization-decoding/README.md) | 22 | 15 |
 
 ## Models
 
@@ -21,7 +21,7 @@ How a model is tuned after training, served to users, and fit into GPU memory.
 
 | Card | Items | Planned |
 |---|---|---|
-| Post-training | 0 | 15 |
+| [Post-training](questions/post-training/README.md) | 24 | 15 |
 | [Inference and serving systems](questions/inference-serving/README.md) | 32 | 30 |
 | [GPU memory, quantization and hardware](questions/gpu-memory-quantization/README.md) | 10 | 15 |
 
@@ -31,10 +31,10 @@ Retrieval, prompts, structured output, evaluation and models that see and hear.
 
 | Card | Items | Planned |
 |---|---|---|
-| RAG | 0 | 15 |
-| Prompting and structured output | 0 | 15 |
-| Evaluation | 0 | 15 |
-| Multimodal | 0 | 15 |
+| [RAG](questions/rag/README.md) | 26 | 15 |
+| [Prompting and structured output](questions/prompting-structured-output/README.md) | 22 | 15 |
+| [Evaluation](questions/evaluation/README.md) | 26 | 15 |
+| [Multimodal](questions/multimodal/README.md) | 22 | 15 |
 
 ## Agents
 
@@ -42,11 +42,11 @@ Agent loops, protocols, teams of agents, sandboxes and evidence from binaries.
 
 | Card | Items | Planned |
 |---|---|---|
-| Agents | 0 | 15 |
-| Protocols: MCP, A2A and skills | 0 | 15 |
-| Multi-agent systems | 0 | 15 |
-| Sandboxes | 0 | 15 |
-| Evidence and reverse engineering | 0 | 15 |
+| [Agents](questions/agents/README.md) | 26 | 15 |
+| [Protocols: MCP, A2A and skills](questions/protocols/README.md) | 22 | 15 |
+| [Multi-agent systems](questions/multi-agent/README.md) | 20 | 15 |
+| [Sandboxes](questions/sandboxes/README.md) | 18 | 15 |
+| [Evidence and reverse engineering](questions/evidence-reverse-engineering/README.md) | 14 | 15 |
 
 ## Production
 
@@ -54,9 +54,9 @@ Operating a model service: releases, observability, cost, capacity and safety.
 
 | Card | Items | Planned |
 |---|---|---|
-| Production and MLOps | 0 | 15 |
-| Cost and capacity | 0 | 15 |
-| Safety | 0 | 15 |
+| [Production and MLOps](questions/production-mlops/README.md) | 26 | 15 |
+| [Cost and capacity](questions/cost-capacity/README.md) | 22 | 15 |
+| [Safety](questions/safety/README.md) | 22 | 15 |
 
 ## Rounds
 
@@ -64,19 +64,19 @@ Whole interview rounds: system design, incidents, coding and behavioral question
 
 | Card | Items | Planned |
 |---|---|---|
-| System design | 0 | 15 |
-| [Incidents and scenarios](scenarios/README.md) | 1 | 30 |
-| Coding | 0 | 15 |
-| Behavioral | 0 | 15 |
+| [System design](questions/system-design/README.md) | 22 | 15 |
+| [Incidents and scenarios](scenarios/README.md) | 60 | 30 |
+| [Coding](questions/coding/README.md) | 22 | 15 |
+| [Behavioral](questions/behavioral/README.md) | 16 | 15 |
 
 ## Roles
 
 | Role | Cards |
 |---|---|
-| LLM Product Engineering | 10 |
-| Agent Systems Engineering | 11 |
-| AI Evaluation and Reliability | 10 |
-| AI Data Systems | 9 |
-| Customer AI Deployment | 10 |
-| Developer Experience and Education | 8 |
-| Inference Engineering | 10 |
+| LLM Product Engineering | 21 |
+| Agent Systems Engineering | 15 |
+| AI Evaluation and Reliability | 22 |
+| AI Data Systems | 14 |
+| Customer AI Deployment | 18 |
+| Developer Experience and Education | 11 |
+| Inference Engineering | 15 |
