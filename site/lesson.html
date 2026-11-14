@@ -728,6 +728,44 @@
       color: var(--ink-soft);
     }
 
+    .lesson-action-panel.is-collapsed {
+      margin: 16px 0 28px;
+      background: transparent;
+      border-color: var(--rule-soft);
+    }
+
+    .lesson-action-panel.is-collapsed .lesson-action-head {
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 0;
+    }
+
+    .lesson-action-panel.is-collapsed .lesson-action-head > div:first-child { display: none; }
+
+    .lesson-action-panel.is-collapsed .lesson-action-status { flex: 1; }
+
+    .lesson-action-details[hidden] { display: none; }
+
+    .lesson-action-toggle {
+      flex-shrink: 0;
+      min-height: 36px;
+      padding: 6px 12px;
+      border: 1px solid var(--blueprint);
+      background: transparent;
+      color: var(--blueprint);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .lesson-action-toggle:hover,
+    .lesson-action-toggle:focus-visible {
+      background: var(--blueprint);
+      color: var(--bg);
+    }
+
     .lesson-action-loop {
       min-width: 0;
       display: grid;
@@ -2729,7 +2767,7 @@
       var hasTrackContext = false;
       try {
         var lessonParams = new URLSearchParams(window.location.search);
-        path = lessonParams.get('path') || '';
+        path = lessonParams.get('path') || (document.querySelector('meta[name="aifs-lesson-path"]') || {}).content || '';
         hasTrackContext = !!(lessonParams.get('track') || lessonParams.get('fromTrack'));
       } catch (_) {}
       if (!/^certifications\/[a-z0-9][a-z0-9-]*\/lessons\//.test(path) && !hasTrackContext) return;
@@ -2852,8 +2890,8 @@
   <script src="header.js?v=20261103a" defer></script>
   <script src="code-copy.js?v=20261103a" defer></script>
   <script src="cmdpalette.js?v=20261103a" defer></script>
-  <script src="lesson-figures.js?v=843871fd2942"></script>
-  <script src="figure-manifest.js?v=46acdc251607"></script>
+  <script src="lesson-figures.js?v=3acd4ab62b2f"></script>
+  <script src="figure-manifest.js?v=349a2b320118"></script>
   <script>
     (function () {
       var root = document.documentElement;
@@ -2896,8 +2934,28 @@
         if (typeof lessonPath !== 'undefined' && lessonPath) fetchLesson(lessonPath);
       };
 
+      function linkFragment(link) {
+        var href = link.getAttribute('href') || '';
+        var hashIndex = href.indexOf('#');
+        return hashIndex < 0 ? '' : href.slice(hashIndex);
+      }
+
+      function isPlainClick(e) {
+        return e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
+      }
+
+      if (document.querySelector('base')) {
+        var anchorFragmentLink = function (e) {
+          var hashLink = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+          if (hashLink) hashLink.setAttribute('href', window.location.pathname + window.location.search + hashLink.getAttribute('href'));
+        };
+        ['pointerdown', 'mousedown', 'touchstart', 'contextmenu', 'focusin', 'auxclick', 'click'].forEach(function (type) {
+          document.addEventListener(type, anchorFragmentLink, true);
+        });
+      }
+
       var params = new URLSearchParams(window.location.search);
-      var lessonPath = params.get('path');
+      var lessonPath = params.get('path') || (document.querySelector('meta[name="aifs-lesson-path"]') || {}).content || null;
       var requestedTrackId = params.get('track') || '';
       var originatingTrackId = params.get('fromTrack') || '';
       var LEARNING_PATH_ID_ALIASES = { 'mcp-engineering': 'model-context-protocol' };
@@ -3844,7 +3902,7 @@
 
       function updateLessonSeo(title, md) {
         var ORIGIN = 'https://aiengineeringfromscratch.com';
-        var path = new URLSearchParams(location.search).get('path') || '';
+        var path = new URLSearchParams(location.search).get('path') || (document.querySelector('meta[name="aifs-lesson-path"]') || {}).content || '';
         var alternate = document.querySelector('link[rel="alternate"][hreflang="' + (document.documentElement.lang || 'en') + '"]');
         var url = alternate ? alternate.href : ORIGIN + '/lesson?path=' + encodeURIComponent(path);
         var contextTrack = certificationContextTrack();
@@ -3987,7 +4045,8 @@
         document.querySelectorAll('a[href^="#"]').forEach(function (link) {
           link.addEventListener('click', function (e) {
             if (link.classList && link.classList.contains('toc-link')) return;
-            var target = document.querySelector(link.getAttribute('href'));
+            if (!isPlainClick(e)) return;
+            var target = document.getElementById(linkFragment(link).slice(1));
             if (target) {
               e.preventDefault();
               target.scrollIntoView({ behavior: preferredScrollBehavior() });
@@ -4096,7 +4155,9 @@
         panel.innerHTML =
           '<div class="lesson-action-head"><div><h2 class="lesson-action-title" id="lessonActionTitle">Act on this lesson</h2>' +
           '<p class="lesson-action-intro">Use this loop to turn reading into evidence. Each checkpoint is yours to mark and stays separate from quiz correctness.</p></div>' +
-          '<div class="lesson-action-status" role="status" aria-live="polite">0 of 5 checkpoints</div></div>' +
+          '<div class="lesson-action-status" role="status" aria-live="polite">0 of 5 checkpoints</div>' +
+          '<button class="lesson-action-toggle" type="button" aria-expanded="false" aria-controls="lessonActionDetails">Show checklist</button></div>' +
+          '<div class="lesson-action-details" id="lessonActionDetails" hidden>' +
           '<div class="lesson-action-loop" aria-label="Lesson workflow checkpoints">' +
           '<button class="lesson-action-step" type="button" data-checkpoint="read"><span class="lesson-action-step-num">01</span><span class="lesson-action-step-title">Read</span><span class="lesson-action-step-copy">Understand the claim and constraints.</span></button>' +
           '<button class="lesson-action-step" type="button" data-checkpoint="built"><span class="lesson-action-step-num">02</span><span class="lesson-action-step-title">Build</span><span class="lesson-action-step-copy">Create or modify the lesson artifact.</span></button>' +
@@ -4107,7 +4168,24 @@
           '<div class="lesson-action-run"><div class="lesson-action-label">Run from the repository</div>' +
           '<div class="lesson-action-command-row"><code class="lesson-action-command">Checking for a standalone runnable file</code><button class="lesson-action-copy" type="button" hidden>Copy command</button></div>' +
           '<p class="lesson-action-note">The page is checking the lesson code directory for a standalone entry point.</p></div>' +
-          lessonActionPathHtml() + '</div>';
+          lessonActionPathHtml() + '</div></div>';
+
+        var actionToggle = panel.querySelector('.lesson-action-toggle');
+        var actionDetails = panel.querySelector('.lesson-action-details');
+        function setLessonActionOpen(open) {
+          actionDetails.hidden = !open;
+          panel.classList.toggle('is-collapsed', !open);
+          actionToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          actionToggle.textContent = open ? 'Hide checklist' : 'Show checklist';
+        }
+        var actionOpen = false;
+        try { actionOpen = window.localStorage.getItem('aifs:lesson-checklist-open') === '1'; } catch (_) {}
+        setLessonActionOpen(actionOpen);
+        actionToggle.addEventListener('click', function () {
+          var next = actionDetails.hidden;
+          setLessonActionOpen(next);
+          try { window.localStorage.setItem('aifs:lesson-checklist-open', next ? '1' : '0'); } catch (_) {}
+        });
 
         var metaTags = article.querySelectorAll('.lesson-meta-tag');
         var anchor = metaTags.length ? metaTags[metaTags.length - 1] : article.querySelector('.learning-objectives, .motto, h1');
@@ -4246,14 +4324,14 @@
 
         sidebar.querySelectorAll('.toc-link').forEach(function (a) {
           a.addEventListener('click', function (e) {
-            var href = a.getAttribute('href');
-            if (!href || href.charAt(0) !== '#') return;
+            var href = linkFragment(a);
+            if (!href || !isPlainClick(e)) return;
             var id = href.slice(1);
             var target = document.getElementById(id);
             if (!target) return;
             e.preventDefault();
             target.scrollIntoView({ behavior: preferredScrollBehavior(), block: 'start' });
-            history.replaceState(null, '', '#' + id);
+            history.replaceState(null, '', location.pathname + location.search + '#' + id);
             if (!target.hasAttribute('tabindex')) {
               target.setAttribute('tabindex', '-1');
               target.addEventListener('blur', function blurHandler() {
@@ -4296,8 +4374,7 @@
           sidebar._tocActiveId = id;
 
           links.forEach(function (link) {
-            var href = link.getAttribute('href');
-            var match = href && href.charAt(0) === '#' ? href.slice(1) : '';
+            var match = linkFragment(link).slice(1);
             if (match === id) link.classList.add('active');
             else link.classList.remove('active');
           });
